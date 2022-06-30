@@ -4,56 +4,64 @@ class Product {
   }
 
   getProducts = async (req, res) => {
-    const products = await this.dataAccess.getProducts({ ...req.query });
+    const dataProducts = await this.dataAccess.getProducts({ ...req.query });
 
-    const { results, available_filters } = products;
-    const items = [];
+    const { results, available_filters: filters } = dataProducts;
 
-    const categories = available_filters.find(
-      (filter) => filter.id === "category"
-    );
-
-    results.forEach((product) => {
+    const categoryFilter = filters.find((filter) => filter.id === "category");
+    const categories = categoryFilter.values.map((category) => category.name);
+    const items = results.map((item) => {
       const {
         id,
         title,
-        installments: { currency_id, amount },
+        price: amount,
+        currency_id: currency,
         thumbnail: picture,
         condition,
         shipping: { free_shipping },
-      } = product;
+      } = item;
 
-      items.push({
+      return {
         id,
         title,
-        price: { currency: currency_id, amount, decimals: amount },
+        price: { currency, amount, decimals: amount },
         picture,
         condition,
         free_shipping,
-      });
+      };
     });
 
-    const respuesta = {
+    const response = {
       author: {
         name: "Juan Pablo",
         lastname: "Romero Londoño",
       },
-      categories: categories.values.map((category) => category.name),
+      categories,
       items,
     };
 
-    res.status(200).json(respuesta);
+    res.status(200).json(response);
   };
 
   getProduct = async (req, res) => {
-    const [product, description] = await this.dataAccess.getProduct({
+    const [attributes, description] = await this.dataAccess.getProduct({
       ...req.params,
     });
 
-    const { id, title, currency_id, price, pictures } = product;
+    const {
+      id,
+      title,
+      currency_id,
+      price,
+      sold_quantity,
+      condition,
+      secure_thumbnail,
+      shipping: { free_shipping },
+    } = attributes;
+
     const { plain_text } = description;
 
-    const respuesta = {
+    const response = {
       author: {
         name: "Juan Pablo",
         lastname: "Romero Londoño",
@@ -62,12 +70,15 @@ class Product {
         id,
         title,
         price: { currency: currency_id, amount: price, decimals: price },
-        pictures,
+        picture: secure_thumbnail,
+        condition,
+        free_shipping,
+        sold_quantity,
         description: plain_text,
       },
     };
 
-    res.status(200).json(respuesta);
+    res.status(200).json(response);
   };
 }
 
