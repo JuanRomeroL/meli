@@ -1,5 +1,4 @@
 class Server {
-  instance;
   start() {}
 }
 
