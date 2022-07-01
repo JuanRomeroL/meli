@@ -1,15 +1,15 @@
 import React from "react";
-import "./SearchBox.css";
 import logo from "../../assets/logo.png";
+import searchLogo from "../../assets/searchLogo.png";
 
-function SearchBox() {
+function SearchBox({ className }: any) {
   return (
-    <div className="search-box">
-      <img src={logo} height={39}></img>
+    <div className={className}>
+      <img src={logo} alt="..." />
       <form>
         <input placeholder="Nunca dejes de buscar"></input>
         <button>
-          <img src={logo} height={20}></img>
+          <img src={searchLogo} alt="..." />
         </button>
       </form>
     </div>

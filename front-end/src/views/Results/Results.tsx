@@ -1,8 +1,8 @@
 import React from "react";
 import "./Results.css";
+import Product from "../../components/Product";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import Product from "../../components/Product/Product";
-import SearchBox from "../../components/SearchBox/SearchBox";
+import SearchBox from "../../components/SearchBox";
 
 function Results() {
   return (

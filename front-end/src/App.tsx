@@ -2,8 +2,8 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Results from "./views/Results/Results";
-import ProductDetail from "./views/ProductDetail/ProductDetail";
 import SearchPage from "./views/SearchPage";
+import ProductDetail from "./views/ProductDetail";
 
 function App() {
   return (

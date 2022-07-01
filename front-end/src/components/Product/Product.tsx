@@ -1,19 +1,24 @@
 import React from "react";
-import "./Product.css";
 import logo from "../../assets/shoesLogo.webp";
 
-function Product() {
+interface stylingProps {
+  className?: string;
+}
+
+function Product({ className }: stylingProps) {
   return (
-    <div className="product">
+    <div className={className}>
       <div className="col-1">
-        <img src={logo} alt="..." height={100}></img>
+        <img src={logo} alt="..." />
         <div>
-          <div>
-            <small>$ 70.000</small>
-            <small>.</small>
+          <div className="row-1">
+            <h3>$ 70.000</h3>
+            <span id="product-state" />
           </div>
 
-          <small>Celular Motorola XS new model 2007 de segunda mano</small>
+          <small>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          </small>
         </div>
       </div>
 
