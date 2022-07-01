@@ -1,9 +1,6 @@
 import React from "react";
 import logo from "../../assets/shoesLogo.webp";
-
-interface stylingProps {
-  className?: string;
-}
+import stylingProps from "../../interfaces";
 
 function Product({ className }: stylingProps) {
   return (

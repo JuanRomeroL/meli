@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBox from "../components/SearchBox/SearchBox";
+import SearchBox from "../components/SearchBox";
 
 function SearchPage() {
   return (

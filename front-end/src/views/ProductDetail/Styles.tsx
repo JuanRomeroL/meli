@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import ProductDetail from "./ProductDetail";
 
@@ -26,8 +25,8 @@ const ProductDetailStyled = styled(ProductDetail)`
     }
 
     #attributes {
-      width: 270px;
-      min-width: 270px;
+      width: 226px;
+      min-width: 226px;
       margin: 15px;
 
       > button {

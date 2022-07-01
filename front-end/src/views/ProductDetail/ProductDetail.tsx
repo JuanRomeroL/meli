@@ -2,8 +2,9 @@ import React from "react";
 import logo from "../../assets/shoesLogo.webp";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import SearchBox from "../../components/SearchBox";
+import stylingProps from "../../interfaces";
 
-function ProductDetail({ className }: any) {
+function ProductDetail({ className }: stylingProps) {
   return (
     <div className={className}>
       <SearchBox />
