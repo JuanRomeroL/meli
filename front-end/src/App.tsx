@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SearchPage from "./views/SearchPage";
 import Results from "./views/Results/Results";
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);

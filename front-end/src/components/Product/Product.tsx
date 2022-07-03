@@ -1,25 +1,30 @@
 import React from "react";
-import logo from "../../assets/shoesLogo.webp";
-import stylingProps from "../../interfaces";
+import ProductType from "../../types/Product";
+import StylingProps from "../../types/StylingProps";
 
-function Product({ className }: stylingProps) {
+function Product({
+  className,
+  title,
+  price,
+  picture,
+  free_shipping,
+  condition,
+}: StylingProps & ProductType) {
   return (
     <div className={className}>
       <div className="col-1">
-        <img src={logo} alt="..." />
+        <img src={picture} alt="..." />
         <div>
           <div className="row-1">
-            <h3>$ 70.000</h3>
-            <span id="product-state" />
+            <h3>{price.amount}</h3>
+            {free_shipping && <span id="free-shipping-enabled" />}
           </div>
 
-          <small>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </small>
+          <small>{title}</small>
         </div>
       </div>
 
-      <small>Medellín, Colombia</small>
+      <small>{condition}</small>
     </div>
   );
 }

@@ -27,7 +27,7 @@ const StyledProduct = styled(Product)`
     margin: 0;
   }
 
-  #product-state {
+  #free-shipping-enabled {
     background-color: #004200;
     width: 12px;
     height: 12px;
