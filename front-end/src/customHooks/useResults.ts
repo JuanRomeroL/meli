@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProductType from "../types/Product";
 const axios = require("axios").default;
 
-export const useResults = (query: any) => {
+export const useResults = (query: string) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
 

@@ -26,7 +26,7 @@ function ProductDetail({ className }: StylingProps) {
             <h3>{title}</h3>
             <h1>
               {price.amount}
-              <small>75</small>
+              <small>{price.decimals}</small>
             </h1>
             <button>Comprar</button>
           </div>

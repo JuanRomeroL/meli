@@ -8,18 +8,16 @@ import useResults from "../../customHooks/useResults";
 import useParams from "../../customHooks/useParams";
 
 const Results = () => {
-  const { products, categories } = useResults(useParams());
-  console.log(categories);
+  const { products } = useResults(useParams() || "");
 
   return (
     <div className="results">
       <SearchBox />
       <Breadcrumb />
       <div className="results-area">
-        {products &&
-          products.length &&
-          products.map((product: ProductType, index: number) => (
-            <Product key={index + "clave"} {...product} />
+        {products.length &&
+          products.map((product: ProductType) => (
+            <Product key={product.id} {...product} />
           ))}
       </div>
     </div>
