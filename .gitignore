@@ -5,4 +5,4 @@
 /build
 
 #debug
-/.vscode
+*/.vscode
