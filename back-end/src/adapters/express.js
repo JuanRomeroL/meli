@@ -6,10 +6,10 @@ const validateGetProducts = require("../middlewares/validateGetProducts");
 const validateGetProduct = require("../middlewares/validateGetProduct");
 
 class Express extends Server {
-  constructor(dataAccess, port) {
+  constructor(controllers, port) {
     super();
     this.port = port;
-    this.dataAccess = dataAccess;
+    this.controllers = controllers;
     this.app = express();
   }
 
@@ -23,7 +23,7 @@ class Express extends Server {
   }
 
   defineRoutes() {
-    const productController = new Product(this.dataAccess);
+    const [productController] = this.controllers;
 
     this.app.get(
       "/api/items",
