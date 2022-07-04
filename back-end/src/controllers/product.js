@@ -3,44 +3,54 @@ class Product {
     this.dataAccess = dataAccess;
   }
 
-  getProducts = async (req, res) => {
-    const dataProducts = await this.dataAccess.getProducts({ ...req.query });
-
-    const { results, available_filters: filters } = dataProducts;
-
-    const categoryFilter = filters.find((filter) => filter.id === "category");
-    const categories = categoryFilter.values.map((category) => category.name);
-    const items = results.map((item) => {
-      const {
-        id,
-        title,
-        price: amount,
-        currency_id: currency,
-        thumbnail: picture,
-        condition,
-        shipping: { free_shipping },
-      } = item;
-
-      return {
-        id,
-        title,
-        price: { currency, amount, decimals: amount },
-        picture,
-        condition,
-        free_shipping,
-      };
+  getProducts = async (req, res, next) => {
+    const { success, data, error } = await this.dataAccess.getProducts({
+      ...req.query,
     });
 
-    const response = {
-      author: {
-        name: "Juan Pablo",
-        lastname: "Romero Londoño",
-      },
-      categories,
-      items,
-    };
+    if (success) {
+      const { results, available_filters: filters } = data;
 
-    res.status(200).json(response);
+      const categoryFilter = filters.find((filter) => filter.id === "category");
+      const categories = categoryFilter
+        ? categoryFilter.values.map((category) => category.name)
+        : [];
+      const items = results.map((item) => {
+        const {
+          id,
+          title,
+          price,
+          currency_id: currency,
+          thumbnail: picture,
+          condition,
+          shipping: { free_shipping },
+        } = item;
+
+        const [amount, decimals] = this.separate(price);
+
+        return {
+          id,
+          title,
+          price: { currency, amount, decimals },
+          picture,
+          condition,
+          free_shipping,
+        };
+      });
+
+      const response = {
+        author: {
+          name: "Juan Pablo",
+          lastname: "Romero Londoño",
+        },
+        categories,
+        items,
+      };
+
+      res.status(200).json(response);
+    } else {
+      res.status(500).json(error);
+    }
   };
 
   getProduct = async (req, res) => {
@@ -55,11 +65,12 @@ class Product {
       price,
       sold_quantity,
       condition,
-      secure_thumbnail,
+      pictures: [, { secure_url }],
       shipping: { free_shipping },
     } = attributes;
 
     const { plain_text } = description;
+    const [amount, decimals] = this.separate(price);
 
     const response = {
       author: {
@@ -69,8 +80,12 @@ class Product {
       item: {
         id,
         title,
-        price: { currency: currency_id, amount: price, decimals: price },
-        picture: secure_thumbnail,
+        price: {
+          currency: currency_id,
+          amount,
+          decimals,
+        },
+        picture: secure_url,
         condition,
         free_shipping,
         sold_quantity,
@@ -79,6 +94,11 @@ class Product {
     };
 
     res.status(200).json(response);
+  };
+
+  separate = (number) => {
+    const [amount, decimals] = number.toFixed(2).toString().split(".");
+    return [parseInt(amount), decimals];
   };
 }
 

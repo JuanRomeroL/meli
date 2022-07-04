@@ -1,28 +1,31 @@
 const Product = require("../controllers/product");
 const Server = require("../interfaces/server");
 const MeliApi = require("./meliApi");
+const express = require("express");
+const cors = require("cors");
 
 class Express extends Server {
-  constructor(port, expressInstance) {
+  constructor(port) {
     super();
     this.port = port;
-    this.expressInstance = expressInstance;
+    this.app = express();
   }
 
   start() {
+    this.app.use(cors());
     this.defineRoutes();
 
-    this.expressInstance.listen(this.port, () => {
+    this.app.listen(this.port, () => {
       console.log("Listening on port " + this.port);
     });
   }
 
   defineRoutes() {
-    const meliApi = new MeliApi();
-    const productController = new Product(meliApi);
+    const dataAccess = new MeliApi();
+    const productController = new Product(dataAccess);
 
-    this.expressInstance.get("/api/items", productController.getProducts);
-    this.expressInstance.get("/api/items/:id", productController.getProduct);
+    this.app.get("/api/items", productController.getProducts);
+    this.app.get("/api/items/:id", productController.getProduct);
   }
 }
 

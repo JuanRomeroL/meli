@@ -10,9 +10,9 @@ class MeliApi extends DataAccess {
         `${this.baseUrl}/sites/MLA/search?q=${params.q}`
       );
 
-      return response.data;
+      return { success: true, data: response.data };
     } catch (error) {
-      return false;
+      return { success: false, error };
     }
   }
 
