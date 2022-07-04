@@ -4,11 +4,11 @@ class Product {
   }
 
   getProducts = async (req, res, next) => {
-    const { success, data, error } = await this.dataAccess.getProducts({
+    const { status, data, error } = await this.dataAccess.getProducts({
       ...req.query,
     });
 
-    if (success) {
+    if (status) {
       const { results, available_filters: filters } = data;
 
       const categoryFilter = filters.find((filter) => filter.id === "category");
@@ -54,46 +54,50 @@ class Product {
   };
 
   getProduct = async (req, res) => {
-    const [attributes, description] = await this.dataAccess.getProduct({
+    const { status, data, error } = await this.dataAccess.getProduct({
       ...req.params,
     });
 
-    const {
-      id,
-      title,
-      currency_id,
-      price,
-      sold_quantity,
-      condition,
-      pictures: [, { secure_url }],
-      shipping: { free_shipping },
-    } = attributes;
-
-    const { plain_text } = description;
-    const [amount, decimals] = this.separate(price);
-
-    const response = {
-      author: {
-        name: "Juan Pablo",
-        lastname: "Romero Londoño",
-      },
-      item: {
+    if (status) {
+      const {
         id,
         title,
-        price: {
-          currency: currency_id,
-          amount,
-          decimals,
-        },
-        picture: secure_url,
-        condition,
-        free_shipping,
+        currency_id,
+        price,
         sold_quantity,
-        description: plain_text,
-      },
-    };
+        condition,
+        pictures: [, { secure_url }],
+        shipping: { free_shipping },
+        plain_text,
+      } = data;
 
-    res.status(200).json(response);
+      const [amount, decimals] = this.separate(price);
+
+      const response = {
+        author: {
+          name: "Juan Pablo",
+          lastname: "Romero Londoño",
+        },
+        item: {
+          id,
+          title,
+          price: {
+            currency: currency_id,
+            amount,
+            decimals,
+          },
+          picture: secure_url,
+          condition,
+          free_shipping,
+          sold_quantity,
+          description: plain_text,
+        },
+      };
+
+      res.status(200).json(response);
+    } else {
+      res.status(500).json(error);
+    }
   };
 
   separate = (number) => {
