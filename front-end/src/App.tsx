@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SearchPage from "./views/SearchPage";
+import SearchPage from "./views/SearchPage/SearchPage";
 import Results from "./views/Results/Results";
 import ProductDetail from "./views/ProductDetail";
 

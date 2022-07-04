@@ -4,6 +4,7 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import SearchBox from "../../components/SearchBox";
 import useProduct from "../../customHooks/useProduct";
 import StylingProps from "../../types/StylingProps";
+import { Helmet } from "react-helmet";
 
 function ProductDetail({ className }: StylingProps) {
   const { id = "" } = useParams();
@@ -12,6 +13,10 @@ function ProductDetail({ className }: StylingProps) {
 
   return (
     <div className={className}>
+      <Helmet>
+        <title>{title} | Mercado Libre</title>
+        <meta name="description" content={title} />
+      </Helmet>
       <SearchBox />
       <Breadcrumb />
       <div className="main">

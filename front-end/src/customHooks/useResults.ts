@@ -15,7 +15,7 @@ export const useResults = (query: string) => {
         setCategories(categories);
       })
       .catch((error: any) => {});
-  }, []);
+  }, [query]);
 
   return { products, categories };
 };

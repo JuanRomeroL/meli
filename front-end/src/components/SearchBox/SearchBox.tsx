@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo.png";
-import searchLogo from "../../assets/searchLogo.png";
+import searchIcon from "../../assets/search.png";
 import StylingProps from "../../types/StylingProps";
 import { useNavigate } from "react-router-dom";
 
@@ -27,7 +27,7 @@ function SearchBox({ className }: StylingProps) {
           value={inputValue}
         />
         <button>
-          <img src={searchLogo} alt="..." />
+          <img src={searchIcon} alt="..." />
         </button>
       </form>
     </div>

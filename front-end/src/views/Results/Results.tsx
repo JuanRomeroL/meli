@@ -6,12 +6,17 @@ import SearchBox from "../../components/SearchBox";
 import ProductType from "../../types/Product";
 import useResults from "../../customHooks/useResults";
 import useParams from "../../customHooks/useParams";
+import { Helmet } from "react-helmet";
 
 const Results = () => {
-  const { products } = useResults(useParams() || "");
+  const query = useParams();
+  const { products } = useResults(query || "");
 
   return (
     <div className="results">
+      <Helmet>
+        <title>Búsqueda de {query} | Mercado Libre</title>
+      </Helmet>
       <SearchBox />
       <Breadcrumb />
       <div className="results-area">
