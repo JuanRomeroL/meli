@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProductType from "../../types/Product";
 import StylingProps from "../../types/StylingProps";
-import { useNavigate } from "react-router-dom";
+
+interface FunctionProps {
+  showDetail: Function;
+}
 
 function Product({
   className,
@@ -11,20 +14,21 @@ function Product({
   picture,
   free_shipping,
   condition,
-}: StylingProps & ProductType) {
-  const navigate = useNavigate();
-
+  showDetail,
+}: StylingProps & ProductType & FunctionProps) {
   const handleClick = () => {
-    navigate(`/items/${id}`);
+    showDetail(id);
   };
 
   return (
     <div className={className} onClick={handleClick}>
       <div className="col-1">
-        <img src={picture} alt="..." />
+        <div className="image">
+          <img src={picture} alt="..." />
+        </div>
         <div>
           <div className="row-1">
-            <h3>{price.amount}</h3>
+            <h2>$ {Intl.NumberFormat("es-AR").format(price.amount)}</h2>
             {free_shipping && <span id="free-shipping-enabled" />}
           </div>
 

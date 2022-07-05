@@ -11,9 +11,18 @@ const StyledProduct = styled(Product)`
     flex-direction: inherit;
   }
 
+  .image {
+    width: 200px;
+    height: 200px;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   img {
-    width: 120px;
-    margin-right: 10px;
+    width: 100%;
+    max-height: 200px;
     border-radius: 2px;
   }
 
@@ -28,7 +37,7 @@ const StyledProduct = styled(Product)`
   }
 
   #free-shipping-enabled {
-    background-color: #004200;
+    background-color: #2a9d58;
     width: 12px;
     height: 12px;
     margin: 8px;

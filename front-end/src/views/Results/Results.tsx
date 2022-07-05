@@ -1,29 +1,46 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./Results.css";
 import Product from "../../components/Product";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import SearchBox from "../../components/SearchBox";
 import ProductType from "../../types/Product";
-import useResults from "../../customHooks/useResults";
-import useParams from "../../customHooks/useParams";
-import { Helmet } from "react-helmet";
+import useResults from "../../hooks/useResults";
+import useParams from "../../hooks/useParams";
+import Header from "../../components/Header";
+import MessageBox from "../../components/MessageBox";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Results = () => {
-  const query = useParams();
-  const { products } = useResults(query || "");
+  const searchQuery = useParams(useLocation().search);
+  const { products, categories, status } = useResults(searchQuery);
+  const title = `Resultados de ${searchQuery}`;
+  const navigate = useNavigate();
+
+  const showProductDetail = (id: string) => {
+    navigate(`/items/${id}`);
+  };
 
   return (
     <div className="results">
-      <Helmet>
-        <title>Búsqueda de {query} | Mercado Libre</title>
-      </Helmet>
-      <SearchBox />
-      <Breadcrumb />
-      <div className="results-area">
-        {products.length &&
+      <Header title={title} keywords={categories} status={status} />
+      <div className="main">
+        {status === "success" &&
           products.map((product: ProductType) => (
-            <Product key={product.id} {...product} />
+            <Product
+              key={product.id}
+              {...product}
+              showDetail={showProductDetail}
+            />
           ))}
+
+        {status === "loading" && (
+          <MessageBox
+            message={`Buscando tus productos con nombre ${searchQuery} ...`}
+          />
+        )}
+        {status === "error" && (
+          <MessageBox
+            message={"Opps! Hubo un error al buscar tus productos."}
+          />
+        )}
       </div>
     </div>
   );

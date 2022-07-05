@@ -16,20 +16,21 @@ const ProductDetailStyled = styled(ProductDetail)`
     align-items: flex-start;
     justify-content: space-between;
 
-    > #imagen {
+    .imagen {
       flex-grow: 1;
 
       img {
         width: 100%;
+        max-width: 500px;
       }
     }
 
-    #attributes {
+    .attributes {
       width: 226px;
       min-width: 226px;
       margin: 15px;
 
-      > button {
+      button {
         width: 100%;
         padding: 10px 20px;
         border: 0;
