@@ -8,7 +8,7 @@ Fue desarrollado con React.js (con Typescript) con el fin de mantener el proyect
 
 A continuación se presenta el árbol de componentes. Se añadió algunas pruebas unitarias con el fin de probar los componentes más importantes.
 
-![Alt text](./diagram.png?raw=true "Title")
+![Alt text](https://firebasestorage.googleapis.com/v0/b/meli-test-d4f08.appspot.com/o/Diagrama%20de%20componentes%20en%20React.png?alt=media&token=a8bd09f8-9f90-4a36-a27a-0cf495225bef "Title")
 
 ### Componente SEO:
 
@@ -48,7 +48,7 @@ Fue desarrollado con Node.js usando buenas prácticas de diseño con el fin de s
 
 ### Diagramación de componentes:
 
-![Alt text](./diagramAPI.png?raw=true "Title")
+![Alt text](https://firebasestorage.googleapis.com/v0/b/meli-test-d4f08.appspot.com/o/Diagrama%20de%20API.png?alt=media&token=8f91e2d3-cf8d-4718-92ea-354f02b90cc2 "Title")
 
 ### Comandos importantes:
 
