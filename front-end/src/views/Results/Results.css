@@ -1,0 +1,9 @@
+.results {
+  background-color: #eeeeee;
+}
+
+.results > .main {
+  margin: 10px 7%;
+  padding: 10px;
+  background-color: #ffff;
+}

@@ -5,4 +5,10 @@
 /build
 
 #debug
-/.vscode
+*/.vscode
+
+#environment
+*/.env
+
+#testing
+*/coverage
