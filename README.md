@@ -52,6 +52,4 @@ Fue desarrollado con Node.js usando buenas prácticas de diseño con el fin de s
 
 ### Comandos importantes:
 
-- Ejecución del proyecto en modo desarrollador (local): `npm run start-dev`
-- Ejecución de las pruebas unitarias: `npm run test`
-- Ejecución de las pruebas unitarias con reporte de coverage: `npm run test`
+- Ejecución del proyecto en modo desarrollador (local): `npm run start-dev`.
