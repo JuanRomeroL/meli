@@ -16,7 +16,7 @@ class Product {
         ? categoryFilter.values.map((category) => category.name)
         : [];
 
-      const maxResults = parseInt(process.env.MAX_RESULTS_QUANTITY);
+      const maxResults = parseInt(process.env.MAX_RESULTS_QUANTITY || "4");
 
       const items = results.slice(0, maxResults).map((item) => {
         const {
