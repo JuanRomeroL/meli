@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import "./Results.css";
 import Product from "../../components/Product";
 import ProductType from "../../types/Product";

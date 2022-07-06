@@ -3,7 +3,7 @@ class Product {
     this.dataAccess = dataAccess;
   }
 
-  getProducts = async (req, res, next) => {
+  getProducts = async (req, res) => {
     const { status, data, error } = await this.dataAccess.getProducts({
       ...req.query,
     });
@@ -15,7 +15,10 @@ class Product {
       const categories = categoryFilter
         ? categoryFilter.values.map((category) => category.name)
         : [];
-      const items = results.map((item) => {
+
+      const maxResults = parseInt(process.env.MAX_RESULTS_QUANTITY || "4");
+
+      const items = results.slice(0, maxResults).map((item) => {
         const {
           id,
           title,
